@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page">
+    <header class="header">
+        <h1>Restaurant Finder</h1>
+        <p class="subtitle">Find the restaurants closest to you in the city center.</p>
+    </header>
+
+    <!-- Search form: client location + sort order -->
+    <form id="search-form" class="card search">
+        <div class="field">
+            <label for="x">X <span class="hint">0–14</span></label>
+            <input type="number" id="x" name="x" min="0" max="14" value="1" required>
+        </div>
+        <div class="field">
+            <label for="y">Y <span class="hint">0–10</span></label>
+            <input type="number" id="y" name="y" min="0" max="10" value="2" required>
+        </div>
+        <div class="field">
+            <label for="sort">Sort</label>
+            <select id="sort" name="sort">
+                <option value="asc">Closest first</option>
+                <option value="desc">Farthest first</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    <!-- Inline error / status banner -->
+    <div id="banner" class="banner" hidden></div>
+
+    <!-- Search results -->
+    <section id="results" class="results" hidden>
+        <p class="results-meta">Your location: <strong id="user-location"></strong> ·
+            <span id="results-count"></span></p>
+        <ul id="locations" class="locations"></ul>
+    </section>
+
+    <!-- Restaurant detail panel -->
+    <aside id="detail" class="card detail" hidden>
+        <button id="detail-close" class="detail-close" aria-label="Close">&times;</button>
+        <h2 id="detail-name"></h2>
+        <dl class="detail-grid">
+            <dt>Type</dt><dd id="detail-type"></dd>
+            <dt>Opening hours</dt><dd id="detail-hours"></dd>
+            <dt>Coordinate</dt><dd id="detail-coordinate"></dd>
+            <dt>Image</dt><dd><a id="detail-image" href="#" target="_blank" rel="noopener">link</a></dd>
+            <dt>ID</dt><dd id="detail-id" class="mono"></dd>
+        </dl>
+    </aside>
+</main>
+
+<footer class="footer">
+    Bonial technical challenge · Spring Boot (Java 21)
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -79,6 +79,13 @@ curl "localhost:8080/search_locations?x=1&y=2"
 curl "localhost:8080/location/51e1545c-8b65-4d83-82f9-7fcad4a23111"
 ```
 
+### Web UI
+
+A small static frontend (plain HTML/CSS + vanilla JS) ships with the app and is served by Spring Boot
+at the root. Open **http://localhost:8080/** in a browser to search by coordinates, switch sort order,
+and click a restaurant to see its details. It lives in `src/main/resources/static/` and calls the same
+two endpoints over `fetch`.
+
 ### Tests
 
 ```bash
@@ -103,6 +110,7 @@ src/main/java/com/bonial/restaurantfinder
 ├── exception/     RestaurantNotFoundException (404), BadRequestException (400)
 └── config/        CityProperties (grid boundaries)
 src/main/resources/restaurants/   the restaurant JSON data files
+src/main/resources/static/        the web UI (index.html, styles.css, app.js)
 ```
 
 Dependencies point inward: `web → service → repository → domain`, with `config` and `exception`
