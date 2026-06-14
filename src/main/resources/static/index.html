@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Finder</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -35,6 +36,21 @@
 
     <!-- Inline error / status banner -->
     <div id="banner" class="banner" hidden></div>
+
+    <!-- City map: all restaurants, the client position, and visibility circles -->
+    <section id="map-card" class="card map" hidden>
+        <div class="map-head">
+            <h2>City map</h2>
+            <div class="legend">
+                <span class="lg lg-you">You</span>
+                <span class="lg lg-vis">In view</span>
+                <span class="lg lg-hid">Out of view</span>
+            </div>
+        </div>
+        <svg id="grid" viewBox="0 0 520 392" role="img"
+             aria-label="City grid showing restaurants and your position"></svg>
+        <p class="map-hint">Click any restaurant on the map to see its details.</p>
+    </section>
 
     <!-- Search results -->
     <section id="results" class="results" hidden>

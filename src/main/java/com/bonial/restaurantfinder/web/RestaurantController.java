@@ -7,6 +7,7 @@ import com.bonial.restaurantfinder.service.RestaurantService;
 import com.bonial.restaurantfinder.service.SortOrder;
 import com.bonial.restaurantfinder.exception.BadRequestException;
 import com.bonial.restaurantfinder.web.dto.RestaurantDetail;
+import com.bonial.restaurantfinder.web.dto.RestaurantSummary;
 import com.bonial.restaurantfinder.web.dto.SearchResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import java.util.Locale;
  * <ul>
  *   <li>{@code GET /search_locations?x=&y=&sort=} — restaurants visible from the client location</li>
  *   <li>{@code GET /location/{id}} — full detail of one restaurant</li>
+ *   <li>{@code GET /locations} — the whole catalogue (supports the map view)</li>
  * </ul>
  *
  * <p>The controller is intentionally thin: it validates input, delegates to {@link RestaurantService},
@@ -58,6 +60,13 @@ public class RestaurantController {
     @GetMapping("/location/{id}")
     public RestaurantDetail getLocation(@PathVariable String id) {
         return RestaurantDetail.from(restaurantService.getById(id));
+    }
+
+    @GetMapping("/locations")
+    public List<RestaurantSummary> listLocations() {
+        return restaurantService.getAll().stream()
+                .map(RestaurantSummary::from)
+                .toList();
     }
 
     private static SortOrder parseSort(String sort) {

@@ -53,6 +53,23 @@ GET /location/51e1545c-8b65-4d83-82f9-7fcad4a23111
 }
 ```
 
+### 3. List all restaurants
+
+```
+GET /locations
+```
+
+Returns the whole catalogue (id, name, coordinate), ordered along the diagonal. This is a small
+read-only addition beyond the two endpoints the challenge asked for — it backs the map in the web UI
+so every restaurant (not just the ones in view) can be drawn and clicked.
+
+```json
+[
+  { "id": "30e1545c-8b65-4d83-82f9-7fcad4a23114", "name": "Wawa Berlin", "coordinate": "x=1,y=1" },
+  { "id": "19e1545c-8b65-4d83-82f9-7fcad4a23114", "name": "Mantra Restaurant", "coordinate": "x=2,y=2" }
+]
+```
+
 ### Errors
 
 Every failure returns a consistent body:
@@ -83,8 +100,10 @@ curl "localhost:8080/location/51e1545c-8b65-4d83-82f9-7fcad4a23111"
 
 A small static frontend (plain HTML/CSS + vanilla JS) ships with the app and is served by Spring Boot
 at the root. Open **http://localhost:8080/** in a browser to search by coordinates, switch sort order,
-and click a restaurant to see its details. It lives in `src/main/resources/static/` and calls the same
-two endpoints over `fetch`.
+and click a restaurant to see its details. It also draws a **city map** (SVG): every restaurant on the
+grid (highlighted when in view), the visibility circles of the ones you can see, and your own position
+— click any dot to open its details. It lives in `src/main/resources/static/` and calls the endpoints
+over `fetch`.
 
 ### Tests
 

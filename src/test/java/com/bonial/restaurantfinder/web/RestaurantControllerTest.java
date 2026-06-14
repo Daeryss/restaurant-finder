@@ -116,6 +116,21 @@ class RestaurantControllerTest {
     }
 
     @Test
+    void listLocationsReturnsTheCatalogue() throws Exception {
+        when(restaurantService.getAll()).thenReturn(List.of(
+                restaurant("id-1", "Wawa Berlin", 1),
+                restaurant("id-2", "Mantra Restaurant", 2)));
+
+        mockMvc.perform(get("/locations"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value("id-1"))
+                .andExpect(jsonPath("$[0].name").value("Wawa Berlin"))
+                .andExpect(jsonPath("$[0].coordinate").value("x=1,y=1"))
+                .andExpect(jsonPath("$[1].name").value("Mantra Restaurant"));
+    }
+
+    @Test
     void getLocationReturns404ForUnknownId() throws Exception {
         when(restaurantService.getById("missing")).thenThrow(new RestaurantNotFoundException("missing"));
 

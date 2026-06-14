@@ -50,6 +50,18 @@ public class RestaurantService {
     }
 
     /**
+     * The whole catalogue, ordered along the diagonal (by x, then id) for a stable listing.
+     * Backs the {@code GET /locations} endpoint and the map view.
+     */
+    public List<Restaurant> getAll() {
+        return repository.findAll().stream()
+                .sorted(Comparator
+                        .comparingInt((Restaurant r) -> r.coordinate().x())
+                        .thenComparing(Restaurant::id))
+                .toList();
+    }
+
+    /**
      * The restaurant with the given id.
      *
      * @throws RestaurantNotFoundException if no restaurant has that id

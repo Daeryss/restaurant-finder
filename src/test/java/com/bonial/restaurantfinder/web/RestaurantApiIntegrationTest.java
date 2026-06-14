@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -93,6 +94,16 @@ class RestaurantApiIntegrationTest {
         mockMvc.perform(get("/location/00000000-0000-0000-0000-000000000000"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404));
+    }
+
+    @Test
+    void listLocationsReturnsTheWholeCatalogueSortedByX() throws Exception {
+        mockMvc.perform(get("/locations"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(10)))
+                .andExpect(jsonPath("$[0].coordinate").value("x=1,y=1"))   // sorted by x ascending
+                .andExpect(jsonPath("$[9].coordinate").value("x=10,y=10"))
+                .andExpect(jsonPath("$[*].name", hasItem("Goji")));         // title-keyed entry resolves
     }
 
     @Test
