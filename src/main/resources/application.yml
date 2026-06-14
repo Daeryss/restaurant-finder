@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+# City-center grid boundaries (the challenge: max x = 14, max y = 10).
+city:
+  max-x: 14
+  max-y: 10
+
+# Glob for the restaurant data files loaded into the in-memory catalogue at startup.
+restaurants:
+  location: "classpath:restaurants/*.json"
+
+logging:
+  level:
+    com.bonial.restaurantfinder: INFO

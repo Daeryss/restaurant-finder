@@ -1,0 +1,8 @@
+{
+  "name": "Marjellchen",
+  "type": "Restaurant",
+  "id": "50e1545c-8b65-4d83-82f9-7fcad4a23115",
+  "openningHours": "10:00AM-11:00PM",
+  "image": "https://tinyurl.com",
+  "coordinate":"x=7,y=7"
+}

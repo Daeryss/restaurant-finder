@@ -1,0 +1,8 @@
+{
+  "name": "Fire Tiger",
+  "type": "Restaurant",
+  "id": "20e1545c-8b65-4d83-82f9-7fcad4a23114",
+  "openningHours": "10:00AM-20:00PM",
+  "image": "https://tinyurl.com",
+  "coordinate":"x=5,y=5"
+}
